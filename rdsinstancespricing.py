@@ -185,7 +185,6 @@ def get_rds_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 	]
 
 	for u in urls:
-		print u
 		if u in RDS_ONDEMAND_STANDARD_TYPE_BY_URL:
 			licensedb = RDS_ONDEMAND_STANDARD_TYPE_BY_URL[u]
 			multiaz = "standard";
@@ -304,4 +303,3 @@ if __name__ == "__main__":
 				region_name = r["region"]
 				for it in r["instanceTypes"]:
 					print "%s,%s,%s,%s,%s,%s" % (region_name, it["type"], it["multiaz"], it["license"], it["db"], none_as_string(it["price"]))
-		
