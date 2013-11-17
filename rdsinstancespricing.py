@@ -54,6 +54,7 @@ RDS_INSTANCE_TYPES = [
 
 RDS_ENGINE_TYPES = [
 	"mysql",
+	"postgresql",
 	"oracle-se1",
 	"oracle",
 	"sqlserver-ex",
@@ -80,6 +81,7 @@ JSON_NAME_TO_RDS_REGIONS_API = {
 }
 
 RDS_MYSQL_STANDARD_ON_DEMAND_URL = "http://aws.amazon.com/rds/pricing/mysql/pricing-standard-deployments.json"
+RDS_POSTGRESQL_STANDARD_ON_DEMAND_URL="http://aws.amazon.com/rds/pricing/postgresql/pricing-standard-deployments.json"
 RDS_ORACLE_LICENSED_STANDARD_ON_DEMAND_URL = "http://aws.amazon.com/rds/pricing/oracle/pricing-li-standard-deployments.json"
 RDS_ORACLE_BYOL_STANDARD_ON_DEMAND_URL = "http://aws.amazon.com/rds/pricing/oracle/pricing-byol-standard-deployments.json"
 RDS_MSSQL_LICENSED_EXPRESS_ON_DEMAND_URL = "http://aws.amazon.com/rds/pricing/sqlserver/sqlserver-li-ex-ondemand.json"
@@ -87,12 +89,14 @@ RDS_MSSQL_LICENSED_WEB_ON_DEMAND_URL = "http://aws.amazon.com/rds/pricing/sqlser
 RDS_MSSQL_LICENSED_STANDARD_ON_DEMAND_URL = "http://aws.amazon.com/rds/pricing/sqlserver/sqlserver-li-se-ondemand.json"
 RDS_MSSQL_BYOL_STANDARD_ON_DEMAND_URL = "http://aws.amazon.com/rds/pricing/sqlserver/sqlserver-byol-ondemand.json"
 RDS_MYSQL_MULTIAZ_ON_DEMAND_URL = "http://aws.amazon.com/rds/pricing/mysql/pricing-multiAZ-deployments.json"
+RDS_POSTGRESQL_MULTIAZ_ON_DEMAND_URL="http://aws.amazon.com/rds/pricing/postgresql/pricing-multiAZ-deployments.json"
 RDS_ORACLE_LICENSED_MULTIAZ_ON_DEMAND_URL = "http://aws.amazon.com/rds/pricing/oracle/pricing-li-multiAZ-deployments.json"
 RDS_ORACLE_BYOL_MULTIAZ_ON_DEMAND_URL = "http://aws.amazon.com/rds/pricing/oracle/pricing-byol-multiAZ-deployments.json"
 
 RDS_MYSQL_RESERVED_LIGHT_URL = "http://aws.amazon.com/rds/pricing/mysql/pricing-light-utilization-reserved-instances.json"
 RDS_MYSQL_RESERVED_MEDIUM_URL = "http://aws.amazon.com/rds/pricing/mysql/pricing-medium-utilization-reserved-instances.json"
 RDS_MYSQL_RESERVED_HEAVY_URL= "http://aws.amazon.com/rds/pricing/mysql/pricing-heavy-utilization-reserved-instances.json"
+RDS_POSTGRESQL_RESERVED_HEAVY_URL="http://aws.amazon.com/rds/pricing/postgresql/pricing-heavy-utilization-reserved-instances.json"
 RDS_ORACLE_LICENSE_RESERVED_LIGHT_URL = "http://aws.amazon.com/rds/pricing/oracle/pricing-li-light-utilization-reserved-instances.json"
 RDS_ORACLE_LICENSE_RESERVED_MEDIUM_URL = "http://aws.amazon.com/rds/pricing/oracle/pricing-li-medium-utilization-reserved-instances.json"
 RDS_ORACLE_LICENSE_RESERVED_HEAVY_URL = "http://aws.amazon.com/rds/pricing/oracle/pricing-li-heavy-utilization-reserved-instances.json"
@@ -124,6 +128,7 @@ RDS_MULTIAZ_MAPPING = {
 
 RDS_ONDEMAND_STANDARD_TYPE_BY_URL = {
 	RDS_MYSQL_STANDARD_ON_DEMAND_URL : ["gpl","mysql"],
+	RDS_POSTGRESQL_STANDARD_ON_DEMAND_URL : ["postgresql","postgresql"],
 	RDS_ORACLE_LICENSED_STANDARD_ON_DEMAND_URL : ["included","oracle-se1"],
 	RDS_ORACLE_BYOL_STANDARD_ON_DEMAND_URL : ["byol","oracle"],
 	RDS_MSSQL_LICENSED_EXPRESS_ON_DEMAND_URL : ["included","sqlserver-ex"],
@@ -134,6 +139,7 @@ RDS_ONDEMAND_STANDARD_TYPE_BY_URL = {
 
 RDS_ONDEMAND_MULTIAZ_TYPE_BY_URL = {
 	RDS_MYSQL_MULTIAZ_ON_DEMAND_URL : ["gpl","mysql"],
+	RDS_POSTGRESQL_MULTIAZ_ON_DEMAND_URL : ["postgresql","postgresql"],
 	RDS_ORACLE_LICENSED_MULTIAZ_ON_DEMAND_URL: ["included","oracle-se1"],
 	RDS_ORACLE_BYOL_MULTIAZ_ON_DEMAND_URL : ["byol","oracle"]	
 }
@@ -142,6 +148,7 @@ RDS_RESERVED_TYPE_BY_URL = {
 	RDS_MYSQL_RESERVED_LIGHT_URL : ["gpl","mysql","light"],
 	RDS_MYSQL_RESERVED_MEDIUM_URL : ["gpl","mysql","medium"],
 	RDS_MYSQL_RESERVED_HEAVY_URL : ["gpl","mysql","heavy"],
+	RDS_POSTGRESQL_RESERVED_HEAVY_URL : ["postgresql","postgresql","heavy"],
 	RDS_ORACLE_LICENSE_RESERVED_LIGHT_URL : ["included","oracle-se1","light"],
 	RDS_ORACLE_LICENSE_RESERVED_MEDIUM_URL : ["included","oracle-se1","medium"],
 	RDS_ORACLE_LICENSE_RESERVED_HEAVY_URL : ["included","oracle-se1","heavy"],
@@ -174,6 +181,7 @@ INSTANCE_TYPE_MAPPING = {
 	"hiMemDBInstClass.xlDBInst" : "db.m2.xlarge",
 	"hiMemDBInstClass.xxlDBInst" : "db.m2.2xlarge",
 	"hiMemDBInstClass.xxxxDBInst" : "db.m2.4xlarge",
+	"clusterHiMemDB.xxxxxxxxl" : "db.cr1.8xlarge",
 	
 	# Multiaz instances
 	"multiAZDBInstClass.uDBInst" : "db.t1.micro",
@@ -184,6 +192,7 @@ INSTANCE_TYPE_MAPPING = {
 	"multiAZHiMemInstClass.xlDBInst" : "db.m2.xlarge",
 	"multiAZHiMemInstClass.xxlDBInst" : "db.m2.2xlarge",
 	"multiAZHiMemInstClass.xxxxDBInst" : "db.m2.4xlarge",
+	"multiAZClusterHiMemDB.xxxxxxxxl" : "db.cr1.8xlarge",
 	
 	#Reserved
 	"stdDeployRes.u" : "db.t1.micro",
@@ -195,6 +204,7 @@ INSTANCE_TYPE_MAPPING = {
 	"stdDeployRes.xlHiMem" : "db.m2.xlarge",
 	"stdDeployRes.xxlHiMem" : "db.m2.2xlarge",
 	"stdDeployRes.xxxxlHiMem" : "db.m2.4xlarge",
+	"stdDeployRes.xxxxxxxxl" : "db.cr1.8xlarge",
 	
 	#Reserved multi az
 	"multiAZdeployRes.u" : "db.t1.micro",
@@ -205,6 +215,7 @@ INSTANCE_TYPE_MAPPING = {
 	"multiAZdeployRes.xlHiMem" : "db.m2.xlarge",
 	"multiAZdeployRes.xxlHiMem" : "db.m2.2xlarge",
 	"multiAZdeployRes.xxxxlHiMem" : "db.m2.4xlarge",
+	"multiAZdeployRes.xxxxxxxxl" : "db.cr1.8xlarge"
 
 }
 
@@ -228,6 +239,7 @@ def get_rds_reserved_instances_prices(filter_region=None, filter_instance_type=N
 		RDS_MYSQL_RESERVED_LIGHT_URL,
 		RDS_MYSQL_RESERVED_MEDIUM_URL,
 		RDS_MYSQL_RESERVED_HEAVY_URL,
+		RDS_POSTGRESQL_RESERVED_HEAVY_URL,
 		RDS_ORACLE_LICENSE_RESERVED_LIGHT_URL,
 		RDS_ORACLE_LICENSE_RESERVED_MEDIUM_URL,
 		RDS_ORACLE_LICENSE_RESERVED_HEAVY_URL,
@@ -360,6 +372,7 @@ def get_rds_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 	
 	urls = [
 	RDS_MYSQL_STANDARD_ON_DEMAND_URL,
+	RDS_POSTGRESQL_STANDARD_ON_DEMAND_URL,
 	RDS_ORACLE_LICENSED_STANDARD_ON_DEMAND_URL,
 	RDS_ORACLE_BYOL_STANDARD_ON_DEMAND_URL,
 	RDS_MSSQL_LICENSED_EXPRESS_ON_DEMAND_URL,
@@ -367,6 +380,7 @@ def get_rds_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 	RDS_MSSQL_LICENSED_STANDARD_ON_DEMAND_URL,
 	RDS_MSSQL_BYOL_STANDARD_ON_DEMAND_URL,
 	RDS_MYSQL_MULTIAZ_ON_DEMAND_URL,
+	RDS_POSTGRESQL_MULTIAZ_ON_DEMAND_URL,
 	RDS_ORACLE_LICENSED_MULTIAZ_ON_DEMAND_URL,
 	RDS_ORACLE_BYOL_MULTIAZ_ON_DEMAND_URL				
 	]
