@@ -54,7 +54,7 @@ RDS_INSTANCE_TYPES = [
 
 RDS_ENGINE_TYPES = [
 	"mysql",
-	"postgresql",
+	"postgres",
 	"oracle-se1",
 	"oracle",
 	"sqlserver-ex",
@@ -80,41 +80,41 @@ JSON_NAME_TO_RDS_REGIONS_API = {
 	"sa-east-1" : "sa-east-1"
 }
 
-RDS_MYSQL_STANDARD_ON_DEMAND_URL = "http://aws.amazon.com/rds/pricing/mysql/pricing-standard-deployments.json"
-RDS_POSTGRESQL_STANDARD_ON_DEMAND_URL="http://aws.amazon.com/rds/pricing/postgresql/pricing-standard-deployments.json"
-RDS_ORACLE_LICENSED_STANDARD_ON_DEMAND_URL = "http://aws.amazon.com/rds/pricing/oracle/pricing-li-standard-deployments.json"
-RDS_ORACLE_BYOL_STANDARD_ON_DEMAND_URL = "http://aws.amazon.com/rds/pricing/oracle/pricing-byol-standard-deployments.json"
-RDS_MSSQL_LICENSED_EXPRESS_ON_DEMAND_URL = "http://aws.amazon.com/rds/pricing/sqlserver/sqlserver-li-ex-ondemand.json"
-RDS_MSSQL_LICENSED_WEB_ON_DEMAND_URL = "http://aws.amazon.com/rds/pricing/sqlserver/sqlserver-li-web-ondemand.json"
-RDS_MSSQL_LICENSED_STANDARD_ON_DEMAND_URL = "http://aws.amazon.com/rds/pricing/sqlserver/sqlserver-li-se-ondemand.json"
-RDS_MSSQL_BYOL_STANDARD_ON_DEMAND_URL = "http://aws.amazon.com/rds/pricing/sqlserver/sqlserver-byol-ondemand.json"
-RDS_MYSQL_MULTIAZ_ON_DEMAND_URL = "http://aws.amazon.com/rds/pricing/mysql/pricing-multiAZ-deployments.json"
-RDS_POSTGRESQL_MULTIAZ_ON_DEMAND_URL="http://aws.amazon.com/rds/pricing/postgresql/pricing-multiAZ-deployments.json"
-RDS_ORACLE_LICENSED_MULTIAZ_ON_DEMAND_URL = "http://aws.amazon.com/rds/pricing/oracle/pricing-li-multiAZ-deployments.json"
-RDS_ORACLE_BYOL_MULTIAZ_ON_DEMAND_URL = "http://aws.amazon.com/rds/pricing/oracle/pricing-byol-multiAZ-deployments.json"
+RDS_MYSQL_STANDARD_ON_DEMAND_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/mysql/pricing-standard-deployments.js"
+RDS_POSTGRESQL_STANDARD_ON_DEMAND_URL="http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/postgresql/pricing-standard-deployments.js"
+RDS_ORACLE_LICENSED_STANDARD_ON_DEMAND_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/oracle/pricing-li-standard-deployments.js"
+RDS_ORACLE_BYOL_STANDARD_ON_DEMAND_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/oracle/pricing-byol-standard-deployments.js"
+RDS_MSSQL_LICENSED_EXPRESS_ON_DEMAND_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/sqlserver/sqlserver-li-ex-ondemand.js"
+RDS_MSSQL_LICENSED_WEB_ON_DEMAND_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/sqlserver/sqlserver-li-web-ondemand.js"
+RDS_MSSQL_LICENSED_STANDARD_ON_DEMAND_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/sqlserver/sqlserver-li-se-ondemand.js"
+RDS_MSSQL_BYOL_STANDARD_ON_DEMAND_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/sqlserver/sqlserver-byol-ondemand.js"
+RDS_MYSQL_MULTIAZ_ON_DEMAND_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/mysql/pricing-multiAZ-deployments.js"
+RDS_POSTGRESQL_MULTIAZ_ON_DEMAND_URL="http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/postgresql/pricing-multiAZ-deployments.js"
+RDS_ORACLE_LICENSED_MULTIAZ_ON_DEMAND_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/oracle/pricing-li-multiAZ-deployments.js"
+RDS_ORACLE_BYOL_MULTIAZ_ON_DEMAND_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/oracle/pricing-byol-multiAZ-deployments.js"
 
-RDS_MYSQL_RESERVED_LIGHT_URL = "http://aws.amazon.com/rds/pricing/mysql/pricing-light-utilization-reserved-instances.json"
-RDS_MYSQL_RESERVED_MEDIUM_URL = "http://aws.amazon.com/rds/pricing/mysql/pricing-medium-utilization-reserved-instances.json"
-RDS_MYSQL_RESERVED_HEAVY_URL= "http://aws.amazon.com/rds/pricing/mysql/pricing-heavy-utilization-reserved-instances.json"
-RDS_POSTGRESQL_RESERVED_HEAVY_URL="http://aws.amazon.com/rds/pricing/postgresql/pricing-heavy-utilization-reserved-instances.json"
-RDS_ORACLE_LICENSE_RESERVED_LIGHT_URL = "http://aws.amazon.com/rds/pricing/oracle/pricing-li-light-utilization-reserved-instances.json"
-RDS_ORACLE_LICENSE_RESERVED_MEDIUM_URL = "http://aws.amazon.com/rds/pricing/oracle/pricing-li-medium-utilization-reserved-instances.json"
-RDS_ORACLE_LICENSE_RESERVED_HEAVY_URL = "http://aws.amazon.com/rds/pricing/oracle/pricing-li-heavy-utilization-reserved-instances.json"
-RDS_ORACLE_BYOL_RESERVED_LIGHT_URL = "http://aws.amazon.com/rds/pricing/oracle/pricing-byol-light-utilization-reserved-instances.json"
-RDS_ORACLE_BYOL_RESERVED_MEDIUM_URL = "http://aws.amazon.com/rds/pricing/oracle/pricing-byol-medium-utilization-reserved-instances.json"
-RDS_ORACLE_BYOL_RESERVED_HEAVY_URL = "http://aws.amazon.com/rds/pricing/oracle/pricing-byol-heavy-utilization-reserved-instances.json"
-RDS_SQLSERVER_BYOL_RESERVED_LIGHT_URL = "http://aws.amazon.com/rds/pricing/sqlserver/sqlserver-byol-light-ri.json"
-RDS_SQLSERVER_BYOL_RESERVED_MEDIUM_URL = "http://aws.amazon.com/rds/pricing/sqlserver/sqlserver-byol-medium-ri.json"
-RDS_SQLSERVER_BYOL_RESERVED_HEAVY_URL = "http://aws.amazon.com/rds/pricing/sqlserver/sqlserver-byol-heavy-ri.json"
-RDS_SQLSERVER_EX_RESERVED_LIGHT_URL = "http://aws.amazon.com/rds/pricing/sqlserver/sqlserver-li-ex-light-ri.json"
-RDS_SQLSERVER_EX_RESERVED_MEDIUM_URL = "http://aws.amazon.com/rds/pricing/sqlserver/sqlserver-li-ex-medium-ri.json"
-RDS_SQLSERVER_EX_RESERVED_HEAVY_URL = "http://aws.amazon.com/rds/pricing/sqlserver/sqlserver-li-ex-heavy-ri.json"
-RDS_SQLSERVER_WEB_RESERVED_LIGHT_URL = "http://aws.amazon.com/rds/pricing/sqlserver/sqlserver-li-web-light-ri.json"
-RDS_SQLSERVER_WEB_RESERVED_MEDIUM_URL = "http://aws.amazon.com/rds/pricing/sqlserver/sqlserver-li-web-medium-ri.json"
-RDS_SQLSERVER_WEB_RESERVED_HEAVY_URL = "http://aws.amazon.com/rds/pricing/sqlserver/sqlserver-li-web-heavy-ri.json"
-RDS_SQLSERVER_SE_RESERVED_LIGHT_URL = "http://aws.amazon.com/rds/pricing/sqlserver/sqlserver-li-se-heavy-ri.json"
-RDS_SQLSERVER_SE_RESERVED_MEDIUM_URL = "http://aws.amazon.com/rds/pricing/sqlserver/sqlserver-li-se-medium-ri.json"
-RDS_SQLSERVER_SE_RESERVED_HEAVY_URL = "http://aws.amazon.com/rds/pricing/sqlserver/sqlserver-li-se-light-ri.json"
+RDS_MYSQL_RESERVED_LIGHT_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/mysql/pricing-light-utilization-reserved-instances.js"
+RDS_MYSQL_RESERVED_MEDIUM_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/mysql/pricing-medium-utilization-reserved-instances.js"
+RDS_MYSQL_RESERVED_HEAVY_URL= "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/mysql/pricing-heavy-utilization-reserved-instances.js"
+RDS_POSTGRESQL_RESERVED_HEAVY_URL="http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/postgresql/pricing-heavy-utilization-reserved-instances.js"
+RDS_ORACLE_LICENSE_RESERVED_LIGHT_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/oracle/pricing-li-light-utilization-reserved-instances.js"
+RDS_ORACLE_LICENSE_RESERVED_MEDIUM_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/oracle/pricing-li-medium-utilization-reserved-instances.js"
+RDS_ORACLE_LICENSE_RESERVED_HEAVY_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/oracle/pricing-li-heavy-utilization-reserved-instances.js"
+RDS_ORACLE_BYOL_RESERVED_LIGHT_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/oracle/pricing-byol-light-utilization-reserved-instances.js"
+RDS_ORACLE_BYOL_RESERVED_MEDIUM_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/oracle/pricing-byol-medium-utilization-reserved-instances.js"
+RDS_ORACLE_BYOL_RESERVED_HEAVY_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/oracle/pricing-byol-heavy-utilization-reserved-instances.js"
+RDS_SQLSERVER_BYOL_RESERVED_LIGHT_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/sqlserver/sqlserver-byol-light-ri.js"
+RDS_SQLSERVER_BYOL_RESERVED_MEDIUM_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/sqlserver/sqlserver-byol-medium-ri.js"
+RDS_SQLSERVER_BYOL_RESERVED_HEAVY_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/sqlserver/sqlserver-byol-heavy-ri.js"
+RDS_SQLSERVER_EX_RESERVED_LIGHT_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/sqlserver/sqlserver-li-ex-light-ri.js"
+RDS_SQLSERVER_EX_RESERVED_MEDIUM_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/sqlserver/sqlserver-li-ex-medium-ri.js"
+RDS_SQLSERVER_EX_RESERVED_HEAVY_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/sqlserver/sqlserver-li-ex-heavy-ri.js"
+RDS_SQLSERVER_WEB_RESERVED_LIGHT_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/sqlserver/sqlserver-li-web-light-ri.js"
+RDS_SQLSERVER_WEB_RESERVED_MEDIUM_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/sqlserver/sqlserver-li-web-medium-ri.js"
+RDS_SQLSERVER_WEB_RESERVED_HEAVY_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/sqlserver/sqlserver-li-web-heavy-ri.js"
+RDS_SQLSERVER_SE_RESERVED_LIGHT_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/sqlserver/sqlserver-li-se-heavy-ri.js"
+RDS_SQLSERVER_SE_RESERVED_MEDIUM_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/sqlserver/sqlserver-li-se-medium-ri.js"
+RDS_SQLSERVER_SE_RESERVED_HEAVY_URL = "http://aws-assets-pricing-prod.s3.amazonaws.com/pricing/rds/sqlserver/sqlserver-li-se-light-ri.js"
 
 RDS_MULTIAZ_TYPES = [
 	"standard",
@@ -128,7 +128,7 @@ RDS_MULTIAZ_MAPPING = {
 
 RDS_ONDEMAND_STANDARD_TYPE_BY_URL = {
 	RDS_MYSQL_STANDARD_ON_DEMAND_URL : ["gpl","mysql"],
-	RDS_POSTGRESQL_STANDARD_ON_DEMAND_URL : ["postgresql","postgresql"],
+	RDS_POSTGRESQL_STANDARD_ON_DEMAND_URL : ["postgresql","postgres"],
 	RDS_ORACLE_LICENSED_STANDARD_ON_DEMAND_URL : ["included","oracle-se1"],
 	RDS_ORACLE_BYOL_STANDARD_ON_DEMAND_URL : ["byol","oracle"],
 	RDS_MSSQL_LICENSED_EXPRESS_ON_DEMAND_URL : ["included","sqlserver-ex"],
@@ -139,7 +139,7 @@ RDS_ONDEMAND_STANDARD_TYPE_BY_URL = {
 
 RDS_ONDEMAND_MULTIAZ_TYPE_BY_URL = {
 	RDS_MYSQL_MULTIAZ_ON_DEMAND_URL : ["gpl","mysql"],
-	RDS_POSTGRESQL_MULTIAZ_ON_DEMAND_URL : ["postgresql","postgresql"],
+	RDS_POSTGRESQL_MULTIAZ_ON_DEMAND_URL : ["postgresql","postgres"],
 	RDS_ORACLE_LICENSED_MULTIAZ_ON_DEMAND_URL: ["included","oracle-se1"],
 	RDS_ORACLE_BYOL_MULTIAZ_ON_DEMAND_URL : ["byol","oracle"]	
 }
@@ -148,7 +148,7 @@ RDS_RESERVED_TYPE_BY_URL = {
 	RDS_MYSQL_RESERVED_LIGHT_URL : ["gpl","mysql","light"],
 	RDS_MYSQL_RESERVED_MEDIUM_URL : ["gpl","mysql","medium"],
 	RDS_MYSQL_RESERVED_HEAVY_URL : ["gpl","mysql","heavy"],
-	RDS_POSTGRESQL_RESERVED_HEAVY_URL : ["postgresql","postgresql","heavy"],
+	RDS_POSTGRESQL_RESERVED_HEAVY_URL : ["postgresql","postgres","heavy"],
 	RDS_ORACLE_LICENSE_RESERVED_LIGHT_URL : ["included","oracle-se1","light"],
 	RDS_ORACLE_LICENSE_RESERVED_MEDIUM_URL : ["included","oracle-se1","medium"],
 	RDS_ORACLE_LICENSE_RESERVED_HEAVY_URL : ["included","oracle-se1","heavy"],
@@ -221,8 +221,11 @@ INSTANCE_TYPE_MAPPING = {
 
 
 def _load_data(url):
-	f = urllib2.urlopen(url)
-	return json.loads(f.read())
+	f = urllib2.urlopen(url).read()
+	def callback(json):
+		return json
+	data = eval(f, {"__builtins__" : None}, {"callback" : callback} )
+	return data
 
 
 def get_rds_reserved_instances_prices(filter_region=None, filter_instance_type=None, filter_multiaz=None, filter_db=None):
@@ -382,7 +385,7 @@ def get_rds_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 	RDS_MYSQL_MULTIAZ_ON_DEMAND_URL,
 	RDS_POSTGRESQL_MULTIAZ_ON_DEMAND_URL,
 	RDS_ORACLE_LICENSED_MULTIAZ_ON_DEMAND_URL,
-	RDS_ORACLE_BYOL_MULTIAZ_ON_DEMAND_URL				
+	RDS_ORACLE_BYOL_MULTIAZ_ON_DEMAND_URL
 	]
 
 	for u in urls:
