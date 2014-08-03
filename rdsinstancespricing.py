@@ -49,6 +49,15 @@ RDS_INSTANCE_TYPES = [
 	"db.m2.xlarge",
 	"db.m2.2xlarge",
 	"db.m2.4xlarge"
+	"db.m3.medium",
+	"db.m3.large",
+	"db.m3.xlarge",
+	"db.m3.2xlarge",
+	"db.r3.large",
+	"db.r3.xlarge",
+	"db.r3.2xlarge"
+	"db.r3.4xlarge",
+	"db.r3.8xlarge"
 ]
 
 RDS_ENGINE_TYPES = [
@@ -92,6 +101,20 @@ RDS_POSTGRESQL_MULTIAZ_ON_DEMAND_URL="http://a0.awsstatic.com/pricing/1/rds/post
 RDS_ORACLE_LICENSED_MULTIAZ_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/oracle/pricing-li-multiAZ-deployments.min.js"
 RDS_ORACLE_BYOL_MULTIAZ_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/oracle/pricing-byol-multiAZ-deployments.min.js"
 
+RDS_OLD_MYSQL_STANDARD_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/mysql/previous-generation/pricing-standard-deployments.min.js"
+RDS_OLD_POSTGRESQL_STANDARD_ON_DEMAND_URL="http://a0.awsstatic.com/pricing/1/rds/postgresql/previous-generation/pricing-standard-deployments.min.js"
+RDS_OLD_ORACLE_LICENSED_STANDARD_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/oracle/previous-generation/pricing-li-standard-deployments.min.js"
+RDS_OLD_ORACLE_BYOL_STANDARD_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/oracle/previous-generation/pricing-byol-standard-deployments.min.js"
+RDS_OLD_MSSQL_LICENSED_EXPRESS_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/sqlserver/previous-generation/sqlserver-li-ex-ondemand.min.js"
+RDS_OLD_MSSQL_LICENSED_WEB_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/sqlserver/previous-generation/sqlserver-li-web-ondemand.min.js"
+RDS_OLD_MSSQL_LICENSED_STANDARD_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/sqlserver/previous-generation/sqlserver-li-se-ondemand.min.js"
+RDS_OLD_MSSQL_BYOL_STANDARD_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/sqlserver/previous-generation/sqlserver-byol-ondemand.min.js"
+RDS_OLD_MYSQL_MULTIAZ_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/mysql/previous-generation/pricing-multiAZ-deployments.min.js"
+RDS_OLD_POSTGRESQL_MULTIAZ_ON_DEMAND_URL="http://a0.awsstatic.com/pricing/1/rds/postgresql/previous-generation/pricing-multiAZ-deployments.min.js"
+RDS_OLD_ORACLE_LICENSED_MULTIAZ_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/oracle/previous-generation/pricing-li-multiAZ-deployments.min.js"
+RDS_OLD_ORACLE_BYOL_MULTIAZ_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/oracle/previous-generation/pricing-byol-multiAZ-deployments.min.js"
+
+
 RDS_MYSQL_RESERVED_LIGHT_URL = "http://a0.awsstatic.com/pricing/1/rds/mysql/pricing-light-utilization-reserved-instances.min.js"
 RDS_MYSQL_RESERVED_MEDIUM_URL = "http://a0.awsstatic.com/pricing/1/rds/mysql/pricing-medium-utilization-reserved-instances.min.js"
 RDS_MYSQL_RESERVED_HEAVY_URL= "http://a0.awsstatic.com/pricing/1/rds/mysql/pricing-heavy-utilization-reserved-instances.min.js"
@@ -115,16 +138,49 @@ RDS_SQLSERVER_SE_RESERVED_LIGHT_URL = "http://a0.awsstatic.com/pricing/1/rds/sql
 RDS_SQLSERVER_SE_RESERVED_MEDIUM_URL = "http://a0.awsstatic.com/pricing/1/rds/sqlserver/sqlserver-li-se-medium-ri.min.js"
 RDS_SQLSERVER_SE_RESERVED_HEAVY_URL = "http://a0.awsstatic.com/pricing/1/rds/sqlserver/sqlserver-li-se-light-ri.min.js"
 
+RDS_OLD_MYSQL_RESERVED_LIGHT_URL = "http://a0.awsstatic.com/pricing/1/rds/mysql/previous-generation/pricing-light-utilization-reserved-instances.min.js"
+RDS_OLD_MYSQL_RESERVED_MEDIUM_URL = "http://a0.awsstatic.com/pricing/1/rds/mysql/previous-generation/pricing-medium-utilization-reserved-instances.min.js"
+RDS_OLD_MYSQL_RESERVED_HEAVY_URL= "http://a0.awsstatic.com/pricing/1/rds/mysql/previous-generation/pricing-heavy-utilization-reserved-instances.min.js"
+RDS_OLD_POSTGRESQL_RESERVED_HEAVY_URL="http://a0.awsstatic.com/pricing/1/rds/postgresql/previous-generation/pricing-heavy-utilization-reserved-instances.min.js"
+RDS_OLD_ORACLE_LICENSE_RESERVED_LIGHT_URL = "http://a0.awsstatic.com/pricing/1/rds/oracle/previous-generation/pricing-li-light-utilization-reserved-instances.min.js"
+RDS_OLD_ORACLE_LICENSE_RESERVED_MEDIUM_URL = "http://a0.awsstatic.com/pricing/1/rds/oracle/previous-generation/pricing-li-medium-utilization-reserved-instances.min.js"
+RDS_OLD_ORACLE_LICENSE_RESERVED_HEAVY_URL = "http://a0.awsstatic.com/pricing/1/rds/oracle/previous-generation/pricing-li-heavy-utilization-reserved-instances.min.js"
+RDS_OLD_ORACLE_BYOL_RESERVED_LIGHT_URL = "http://a0.awsstatic.com/pricing/1/rds/oracle/previous-generation/pricing-byol-light-utilization-reserved-instances.min.js"
+RDS_OLD_ORACLE_BYOL_RESERVED_MEDIUM_URL = "http://a0.awsstatic.com/pricing/1/rds/oracle/previous-generation/pricing-byol-medium-utilization-reserved-instances.min.js"
+RDS_OLD_ORACLE_BYOL_RESERVED_HEAVY_URL = "http://a0.awsstatic.com/pricing/1/rds/oracle/previous-generation/pricing-byol-heavy-utilization-reserved-instances.min.js"
+RDS_OLD_SQLSERVER_BYOL_RESERVED_LIGHT_URL = "http://a0.awsstatic.com/pricing/1/rds/sqlserver/previous-generation/sqlserver-byol-light-ri.min.js"
+RDS_OLD_SQLSERVER_BYOL_RESERVED_MEDIUM_URL = "http://a0.awsstatic.com/pricing/1/rds/sqlserver/previous-generation/sqlserver-byol-medium-ri.min.js"
+RDS_OLD_SQLSERVER_BYOL_RESERVED_HEAVY_URL = "http://a0.awsstatic.com/pricing/1/rds/sqlserver/previous-generation/sqlserver-byol-heavy-ri.min.js"
+RDS_OLD_SQLSERVER_EX_RESERVED_LIGHT_URL = "http://a0.awsstatic.com/pricing/1/rds/sqlserver/previous-generation/sqlserver-li-ex-light-ri.min.js"
+RDS_OLD_SQLSERVER_EX_RESERVED_MEDIUM_URL = "http://a0.awsstatic.com/pricing/1/rds/sqlserver/previous-generation/sqlserver-li-ex-medium-ri.min.js"
+RDS_OLD_SQLSERVER_EX_RESERVED_HEAVY_URL = "http://a0.awsstatic.com/pricing/1/rds/sqlserver/previous-generation/sqlserver-li-ex-heavy-ri.min.js"
+RDS_OLD_SQLSERVER_WEB_RESERVED_LIGHT_URL = "http://a0.awsstatic.com/pricing/1/rds/sqlserver/previous-generation/sqlserver-li-web-light-ri.min.js"
+RDS_OLD_SQLSERVER_WEB_RESERVED_MEDIUM_URL = "http://a0.awsstatic.com/pricing/1/rds/sqlserver/previous-generation/sqlserver-li-web-medium-ri.min.js"
+RDS_OLD_SQLSERVER_WEB_RESERVED_HEAVY_URL = "http://a0.awsstatic.com/pricing/1/rds/sqlserver/previous-generation/sqlserver-li-web-heavy-ri.min.js"
+RDS_OLD_SQLSERVER_SE_RESERVED_LIGHT_URL = "http://a0.awsstatic.com/pricing/1/rds/sqlserver/previous-generation/sqlserver-li-se-heavy-ri.min.js"
+RDS_OLD_SQLSERVER_SE_RESERVED_MEDIUM_URL = "http://a0.awsstatic.com/pricing/1/rds/sqlserver/previous-generation/sqlserver-li-se-medium-ri.min.js"
+RDS_OLD_SQLSERVER_SE_RESERVED_HEAVY_URL = "http://a0.awsstatic.com/pricing/1/rds/sqlserver/previous-generation/sqlserver-li-se-light-ri.min.js"
+
+
 RDS_MULTIAZ_TYPES = [
 	"standard",
 	"multiaz"
 	]
 
 RDS_MULTIAZ_MAPPING = {
-	"stdDeployRes" : "standard",
-	"multiAZdeployRes" : "multiaz",
-	"Single-AZ Deployment (Reserved)" : "standard",
+	"Standard Instances - Current Generation - Single-AZ" : "standard",
+	"Memory Optimized Instances - Current Generation - Single-AZ" : "standard",
+	"Micro and Small Instances - Current Generation - Single-AZ" : "standard",
+	"Standard Instances - Current Generation - Multi-AZ" : "multiaz",
+	"Memory Optimized Instances - Current Generation - Multi-AZ" : "multiaz",
+	"Micro and Small Instances - Current Generation - Multi-AZ" : "multiaz",
 	
+	"Standard Instances - Previous Generation - Single-AZ" : "standard",
+	"Memory Optimized Instances - Previous Generation - Single-AZ" : "standard",
+	"Micro and Small Instances - Previous Generation - Single-AZ" : "standard",
+	"Standard Instances - Previous Generation - Multi-AZ" : "multiaz",
+	"Memory Optimized Instances - Previous Generation - Multi-AZ" : "multiaz",
+	"Micro and Small Instances - Previous Generation - Multi-AZ" : "multiaz"
 }
 
 RDS_ONDEMAND_STANDARD_TYPE_BY_URL = {
@@ -135,14 +191,28 @@ RDS_ONDEMAND_STANDARD_TYPE_BY_URL = {
 	RDS_MSSQL_LICENSED_EXPRESS_ON_DEMAND_URL : ["included","sqlserver-ex"],
 	RDS_MSSQL_LICENSED_WEB_ON_DEMAND_URL : ["included","sqlserver-web"],
 	RDS_MSSQL_LICENSED_STANDARD_ON_DEMAND_URL : ["included","sqlserver-se"],
-	RDS_MSSQL_BYOL_STANDARD_ON_DEMAND_URL : ["byol","sqlserver"]	
+	RDS_MSSQL_BYOL_STANDARD_ON_DEMAND_URL : ["byol","sqlserver"],
+	
+	RDS_OLD_MYSQL_STANDARD_ON_DEMAND_URL : ["gpl","mysql"],
+	RDS_OLD_POSTGRESQL_STANDARD_ON_DEMAND_URL : ["postgresql","postgres"],
+	RDS_OLD_ORACLE_LICENSED_STANDARD_ON_DEMAND_URL : ["included","oracle-se1"],
+	RDS_OLD_ORACLE_BYOL_STANDARD_ON_DEMAND_URL : ["byol","oracle"],
+	RDS_OLD_MSSQL_LICENSED_EXPRESS_ON_DEMAND_URL : ["included","sqlserver-ex"],
+	RDS_OLD_MSSQL_LICENSED_WEB_ON_DEMAND_URL : ["included","sqlserver-web"],
+	RDS_OLD_MSSQL_LICENSED_STANDARD_ON_DEMAND_URL : ["included","sqlserver-se"],
+	RDS_OLD_MSSQL_BYOL_STANDARD_ON_DEMAND_URL : ["byol","sqlserver"]
 }
 
 RDS_ONDEMAND_MULTIAZ_TYPE_BY_URL = {
 	RDS_MYSQL_MULTIAZ_ON_DEMAND_URL : ["gpl","mysql"],
 	RDS_POSTGRESQL_MULTIAZ_ON_DEMAND_URL : ["postgresql","postgres"],
 	RDS_ORACLE_LICENSED_MULTIAZ_ON_DEMAND_URL: ["included","oracle-se1"],
-	RDS_ORACLE_BYOL_MULTIAZ_ON_DEMAND_URL : ["byol","oracle"]	
+	RDS_ORACLE_BYOL_MULTIAZ_ON_DEMAND_URL : ["byol","oracle"],
+	
+	RDS_OLD_MYSQL_MULTIAZ_ON_DEMAND_URL : ["gpl","mysql"],
+	RDS_OLD_POSTGRESQL_MULTIAZ_ON_DEMAND_URL : ["postgresql","postgres"],
+	RDS_OLD_ORACLE_LICENSED_MULTIAZ_ON_DEMAND_URL: ["included","oracle-se1"],
+	RDS_OLD_ORACLE_BYOL_MULTIAZ_ON_DEMAND_URL : ["byol","oracle"]	
 }
 
 RDS_RESERVED_TYPE_BY_URL = {
@@ -167,80 +237,34 @@ RDS_RESERVED_TYPE_BY_URL = {
 	RDS_SQLSERVER_WEB_RESERVED_HEAVY_URL : ["included","sqlserver-web","heavy"],
 	RDS_SQLSERVER_SE_RESERVED_LIGHT_URL : ["included","sqlserver-se","light"],
 	RDS_SQLSERVER_SE_RESERVED_MEDIUM_URL : ["included","sqlserver-se","medium"],
-	RDS_SQLSERVER_SE_RESERVED_HEAVY_URL : ["included","sqlserver-se","heavy"]
+	RDS_SQLSERVER_SE_RESERVED_HEAVY_URL : ["included","sqlserver-se","heavy"],
+	
+	RDS_OLD_MYSQL_RESERVED_LIGHT_URL : ["gpl","mysql","light"],
+	RDS_OLD_MYSQL_RESERVED_MEDIUM_URL : ["gpl","mysql","medium"],
+	RDS_OLD_MYSQL_RESERVED_HEAVY_URL : ["gpl","mysql","heavy"],
+	RDS_OLD_POSTGRESQL_RESERVED_HEAVY_URL : ["postgresql","postgres","heavy"],
+	RDS_OLD_ORACLE_LICENSE_RESERVED_LIGHT_URL : ["included","oracle-se1","light"],
+	RDS_OLD_ORACLE_LICENSE_RESERVED_MEDIUM_URL : ["included","oracle-se1","medium"],
+	RDS_OLD_ORACLE_LICENSE_RESERVED_HEAVY_URL : ["included","oracle-se1","heavy"],
+	RDS_OLD_ORACLE_BYOL_RESERVED_LIGHT_URL : ["byol","oracle","light"],
+	RDS_OLD_ORACLE_BYOL_RESERVED_MEDIUM_URL : ["byol","oracle","medium"],
+	RDS_OLD_ORACLE_BYOL_RESERVED_HEAVY_URL : ["byol","oracle","heavy"],
+	RDS_OLD_SQLSERVER_BYOL_RESERVED_LIGHT_URL : ["byol","sqlserver","light"],
+	RDS_OLD_SQLSERVER_BYOL_RESERVED_MEDIUM_URL : ["byol","sqlserver","medium"],
+	RDS_OLD_SQLSERVER_BYOL_RESERVED_HEAVY_URL : ["byol","sqlserver","heavy"],
+	RDS_OLD_SQLSERVER_EX_RESERVED_LIGHT_URL : ["included","sqlserver-ex","light"],
+	RDS_OLD_SQLSERVER_EX_RESERVED_MEDIUM_URL : ["included","sqlserver-ex","medium"],
+	RDS_OLD_SQLSERVER_EX_RESERVED_HEAVY_URL : ["included","sqlserver-ex","heavy"],
+	RDS_OLD_SQLSERVER_WEB_RESERVED_LIGHT_URL : ["included","sqlserver-web","light"],
+	RDS_OLD_SQLSERVER_WEB_RESERVED_MEDIUM_URL : ["included","sqlserver-web","medium"],
+	RDS_OLD_SQLSERVER_WEB_RESERVED_HEAVY_URL : ["included","sqlserver-web","heavy"],
+	RDS_OLD_SQLSERVER_SE_RESERVED_LIGHT_URL : ["included","sqlserver-se","light"],
+	RDS_OLD_SQLSERVER_SE_RESERVED_MEDIUM_URL : ["included","sqlserver-se","medium"],
+	RDS_OLD_SQLSERVER_SE_RESERVED_HEAVY_URL : ["included","sqlserver-se","heavy"]
+
 }
 
 DEFAULT_CURRENCY = "USD"
-
-INSTANCE_TYPE_MAPPING = {
-	"udbInstClass.uDBInst" : "db.t1.micro",
-	"dbInstClass.uDBInst" : "db.t1.micro",
-	"dbInstClass.db.t1.micro" : "db.t1.micro",
-	"dbInstClass.db.m3.medium" : "db.m3.medium",
-	"dbInstClass.db.m3.large" : "db.m3.large",
-	"dbInstClass.db.m3.xlarge" : "db.m3.xlarge",
-	"dbInstClass.db.m3.2xlarge" : "db.m3.2xlarge",
-	"dbInstClass.smDBInst" : "db.m1.small",
-	"dbInstClass.db.m1.small" : "db.m1.small",
-	"dbInstClass.medDBInst" : "db.m1.medium",
-	"dbInstClass.db.m1.medium" : "db.m1.medium",
-	"dbInstClass.lgDBInst" : "db.m1.large",
-	"dbInstClass.db.m1.large" : "db.m1.large",
-	"dbInstClass.xlDBInst" : "db.m1.xlarge",
-	"dbInstClass.db.m1.xlarge" : "db.m1.xlarge",
-	"hiMemDBInstClass.xlDBInst" : "db.m2.xlarge",
-	"memDBCurrentGen.db.m2.xlarge" : "db.m2.xlarge",
-	"hiMemDBInstClass.xxlDBInst" : "db.m2.2xlarge",
-	"memDBCurrentGen.db.m2.2xlarge" : "db.m2.2xlarge",
-	"hiMemDBInstClass.xxxxDBInst" : "db.m2.4xlarge",
-	"memDBCurrentGen.db.m2.4xlarge" : "db.m2.4xlarge",
-	"clusterHiMemDB.xxxxxxxxl" : "db.cr1.8xlarge",
-	"memDBCurrentGen.db.cr1.8xl": "db.cr1.8xlarge",
-	
-	# Multiaz instances
-	"multiAZDBInstClass.uDBInst" : "db.t1.micro",
-	"multiAZDBInstClass.smDBInst" : "db.m1.small",
-	"multiAZDBInstClass.medDBInst" : "db.m1.medium",
-	"multiAZDBInstClass.lgDBInst" : "db.m1.large",
-	"multiAZDBInstClass.xlDBInst" : "db.m1.xlarge",
-	"multiAZDBInstClass.db.t1.micro" : "db.t1.micro",
-	"multiAZDBInstClass.db.m1.small" : "db.m1.small",
-	"multiAZDBInstClass.db.m1.medium" : "db.m1.medium",
-	"multiAZDBInstClass.db.m1.large" : "db.m1.large",
-	"multiAZDBInstClass.db.m1.xlarge" : "db.m1.xlarge",
-	"multiAZDBInstClass.db.m3.medium" : "db.m3.medium",
-	"multiAZDBInstClass.db.m3.large" : "db.m3.large",
-	"multiAZDBInstClass.db.m3.xlarge" : "db.m3.xlarge",
-	"multiAZDBInstClass.db.m3.2xlarge" : "db.m3.2xlarge",
-	"multiAZHiMemInstClass.xlDBInst" : "db.m2.xlarge",
-	"multiAZHiMemInstClass.xxlDBInst" : "db.m2.2xlarge",
-	"multiAZHiMemInstClass.xxxxDBInst" : "db.m2.4xlarge",
-	"multiAZClusterHiMemDB.xxxxxxxxl" : "db.cr1.8xlarge",
-	
-	#Reserved
-	"stdDeployRes.u" : "db.t1.micro",
-	"stdDeployRes.micro" : "db.t1.micro",
-	"stdDeployRes.sm" : "db.m1.small",
-	"stdDeployRes.med" : "db.m1.medium",
-	"stdDeployRes.lg" : "db.m1.large",
-	"stdDeployRes.xl" : "db.m1.xlarge",
-	"stdDeployRes.xlHiMem" : "db.m2.xlarge",
-	"stdDeployRes.xxlHiMem" : "db.m2.2xlarge",
-	"stdDeployRes.xxxxlHiMem" : "db.m2.4xlarge",
-	"stdDeployRes.xxxxxxxxl" : "db.cr1.8xlarge",
-	
-	#Reserved multi az
-	"multiAZdeployRes.u" : "db.t1.micro",
-	"multiAZdeployRes.sm" : "db.m1.small",
-	"multiAZdeployRes.med" : "db.m1.medium",
-	"multiAZdeployRes.lg" : "db.m1.large",
-	"multiAZdeployRes.xl" : "db.m1.xlarge",
-	"multiAZdeployRes.xlHiMem" : "db.m2.xlarge",
-	"multiAZdeployRes.xxlHiMem" : "db.m2.2xlarge",
-	"multiAZdeployRes.xxxxlHiMem" : "db.m2.4xlarge",
-	"multiAZdeployRes.xxxxxxxxl" : "db.cr1.8xlarge"
-
-}
 
 
 def _load_data(url):
@@ -286,7 +310,30 @@ def get_rds_reserved_instances_prices(filter_region=None, filter_instance_type=N
 		RDS_SQLSERVER_WEB_RESERVED_HEAVY_URL,
 		RDS_SQLSERVER_SE_RESERVED_LIGHT_URL,
 		RDS_SQLSERVER_SE_RESERVED_MEDIUM_URL,
-		RDS_SQLSERVER_SE_RESERVED_HEAVY_URL					
+		RDS_SQLSERVER_SE_RESERVED_HEAVY_URL,
+		
+		RDS_OLD_MYSQL_RESERVED_LIGHT_URL,
+		RDS_OLD_MYSQL_RESERVED_MEDIUM_URL,
+		RDS_OLD_MYSQL_RESERVED_HEAVY_URL,
+		RDS_OLD_POSTGRESQL_RESERVED_HEAVY_URL,
+		RDS_OLD_ORACLE_LICENSE_RESERVED_LIGHT_URL,
+		RDS_OLD_ORACLE_LICENSE_RESERVED_MEDIUM_URL,
+		RDS_OLD_ORACLE_LICENSE_RESERVED_HEAVY_URL,
+		RDS_OLD_ORACLE_BYOL_RESERVED_LIGHT_URL,
+		RDS_OLD_ORACLE_BYOL_RESERVED_MEDIUM_URL,
+		RDS_OLD_ORACLE_BYOL_RESERVED_HEAVY_URL,
+		RDS_OLD_SQLSERVER_BYOL_RESERVED_LIGHT_URL,
+		RDS_OLD_SQLSERVER_BYOL_RESERVED_MEDIUM_URL,
+		RDS_OLD_SQLSERVER_BYOL_RESERVED_HEAVY_URL,
+		RDS_OLD_SQLSERVER_EX_RESERVED_LIGHT_URL,
+		RDS_OLD_SQLSERVER_EX_RESERVED_MEDIUM_URL,
+		RDS_OLD_SQLSERVER_EX_RESERVED_HEAVY_URL,
+		RDS_OLD_SQLSERVER_WEB_RESERVED_LIGHT_URL,
+		RDS_OLD_SQLSERVER_WEB_RESERVED_MEDIUM_URL,
+		RDS_OLD_SQLSERVER_WEB_RESERVED_HEAVY_URL,
+		RDS_OLD_SQLSERVER_SE_RESERVED_LIGHT_URL,
+		RDS_OLD_SQLSERVER_SE_RESERVED_MEDIUM_URL,
+		RDS_OLD_SQLSERVER_SE_RESERVED_HEAVY_URL	
 	]
 
 	result_regions = []
@@ -300,7 +347,7 @@ def get_rds_reserved_instances_prices(filter_region=None, filter_instance_type=N
 
 	for u in urls:
 		info = RDS_RESERVED_TYPE_BY_URL[u]
-		license = info[0]
+		lic = info[0]
 		db = info[1]
 		utilization_type = info[2]
 		
@@ -328,10 +375,8 @@ def get_rds_reserved_instances_prices(filter_region=None, filter_instance_type=N
 							multiaz = RDS_MULTIAZ_MAPPING[it["type"]]
 							if get_specific_multiaz and multiaz != filter_multiaz:
 								continue
-							instance_class = it["type"]
 							if "tiers" in it:
 								for s in it["tiers"]:
-									#_type = INSTANCE_TYPE_MAPPING[instance_class + "." + s["size"] ]
 									_type = s["size"]
 	
 									if get_specific_instance_type and _type != filter_instance_type:
@@ -351,7 +396,7 @@ def get_rds_reserved_instances_prices(filter_region=None, filter_instance_type=N
 									instance_types.append({
 										"type" : _type,
 										"multiaz" : multiaz,
-										"license" : license,
+										"license" : lic,
 										"db" : db,
 										"utilization" : utilization_type,
 										"prices" : prices
@@ -412,7 +457,20 @@ def get_rds_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 	RDS_MYSQL_MULTIAZ_ON_DEMAND_URL,
 	RDS_POSTGRESQL_MULTIAZ_ON_DEMAND_URL,
 	RDS_ORACLE_LICENSED_MULTIAZ_ON_DEMAND_URL,
-	RDS_ORACLE_BYOL_MULTIAZ_ON_DEMAND_URL
+	RDS_ORACLE_BYOL_MULTIAZ_ON_DEMAND_URL,
+	
+	RDS_OLD_MYSQL_STANDARD_ON_DEMAND_URL,
+	RDS_OLD_POSTGRESQL_STANDARD_ON_DEMAND_URL,
+	RDS_OLD_ORACLE_LICENSED_STANDARD_ON_DEMAND_URL,
+	RDS_OLD_ORACLE_BYOL_STANDARD_ON_DEMAND_URL,
+	RDS_OLD_MSSQL_LICENSED_EXPRESS_ON_DEMAND_URL,
+	RDS_OLD_MSSQL_LICENSED_WEB_ON_DEMAND_URL,
+	RDS_OLD_MSSQL_LICENSED_STANDARD_ON_DEMAND_URL,
+	RDS_OLD_MSSQL_BYOL_STANDARD_ON_DEMAND_URL,
+	RDS_OLD_MYSQL_MULTIAZ_ON_DEMAND_URL,
+	RDS_OLD_POSTGRESQL_MULTIAZ_ON_DEMAND_URL,
+	RDS_OLD_ORACLE_LICENSED_MULTIAZ_ON_DEMAND_URL,
+	RDS_OLD_ORACLE_BYOL_MULTIAZ_ON_DEMAND_URL
 	]
 
 	for u in urls:
@@ -437,10 +495,9 @@ def get_rds_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 					instance_types = []
 					if "types" in r:
 						for it in r["types"]:
-							instance_class = it["name"]
 							if "tiers" in it:
 								for s in it["tiers"]:
-									_type = INSTANCE_TYPE_MAPPING[instance_class + "." + s["name"] ]
+									_type = s["name"]
 	
 									if get_specific_instance_type and _type != filter_instance_type:
 										continue
