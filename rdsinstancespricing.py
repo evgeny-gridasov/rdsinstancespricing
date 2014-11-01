@@ -177,10 +177,12 @@ RDS_MULTIAZ_MAPPING = {
 	"Standard Instances - Current Generation - Multi-AZ" : "multiaz",
 	"Memory Optimized Instances - Current Generation - Multi-AZ" : "multiaz",
 	"Micro and Small Instances - Current Generation - Multi-AZ" : "multiaz",
+        "Micro Instances - Previous Generation - Multi-AZ" : "multiaz",
 	
 	"Standard Instances - Previous Generation - Single-AZ" : "standard",
 	"Memory Optimized Instances - Previous Generation - Single-AZ" : "standard",
 	"Micro and Small Instances - Previous Generation - Single-AZ" : "standard",
+        "Micro Instances - Previous Generation - Single-AZ" : "standard",
 	"Standard Instances - Previous Generation - Multi-AZ" : "multiaz",
 	"Memory Optimized Instances - Previous Generation - Multi-AZ" : "multiaz",
 	"Micro and Small Instances - Previous Generation - Multi-AZ" : "multiaz"
