@@ -32,6 +32,7 @@ except ImportError:
 RDS_REGIONS = [
 	"us-east-1",
 	"us-west-1",
+	"us-gov-west-1",
 	"us-west-2",
 	"eu-west-1",
 	"eu-central-1",
@@ -77,6 +78,7 @@ JSON_NAME_TO_RDS_REGIONS_API = {
 	"us-east-1" : "us-east-1",
 	"us-west" : "us-west-1",
 	"us-west-1" : "us-west-1",
+	"us-gov-west-1" : "us-gov-west-1",
 	"us-west-2" : "us-west-2",
 	"eu-ireland" : "eu-west-1",
 	"eu-west-1" : "eu-west-1",
