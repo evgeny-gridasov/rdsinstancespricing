@@ -24,6 +24,7 @@
 import urllib2
 import argparse
 import re
+import sys
 try:
 	import simplejson as json
 except ImportError:
@@ -65,6 +66,8 @@ RDS_INSTANCE_TYPES = [
 
 RDS_ENGINE_TYPES = [
 	"mysql",
+	"mariadb",
+	"aurora",
 	"postgres",
 	"oracle-se1",
 	"oracle",
@@ -96,6 +99,7 @@ JSON_NAME_TO_RDS_REGIONS_API = {
 }
 
 RDS_MYSQL_STANDARD_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/mysql/pricing-standard-deployments.min.js"
+RDS_MARIADB_STANDARD_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/mariadb/pricing-standard-deployments.min.js"
 RDS_POSTGRESQL_STANDARD_ON_DEMAND_URL="http://a0.awsstatic.com/pricing/1/rds/postgresql/pricing-standard-deployments.min.js"
 RDS_ORACLE_LICENSED_STANDARD_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/oracle/pricing-li-standard-deployments.min.js"
 RDS_ORACLE_BYOL_STANDARD_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/oracle/pricing-byol-standard-deployments.min.js"
@@ -104,6 +108,8 @@ RDS_MSSQL_LICENSED_WEB_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/sq
 RDS_MSSQL_LICENSED_STANDARD_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/sqlserver/sqlserver-li-se-ondemand.min.js"
 RDS_MSSQL_BYOL_STANDARD_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/sqlserver/sqlserver-byol-ondemand.min.js"
 RDS_MYSQL_MULTIAZ_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/mysql/pricing-multiAZ-deployments.min.js"
+RDS_MARIADB_MULTIAZ_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/mariadb/pricing-multiAZ-deployments.min.js"
+RDS_AURORA_MULTIAZ_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/aurora/pricing-multiAZ-deployments.min.js"
 RDS_POSTGRESQL_MULTIAZ_ON_DEMAND_URL="http://a0.awsstatic.com/pricing/1/rds/postgresql/pricing-multiAZ-deployments.min.js"
 RDS_ORACLE_LICENSED_MULTIAZ_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/oracle/pricing-li-multiAZ-deployments.min.js"
 RDS_ORACLE_BYOL_MULTIAZ_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/oracle/pricing-byol-multiAZ-deployments.min.js"
@@ -120,7 +126,6 @@ RDS_OLD_MYSQL_MULTIAZ_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/mys
 RDS_OLD_POSTGRESQL_MULTIAZ_ON_DEMAND_URL="http://a0.awsstatic.com/pricing/1/rds/postgresql/previous-generation/pricing-multiAZ-deployments.min.js"
 RDS_OLD_ORACLE_LICENSED_MULTIAZ_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/oracle/previous-generation/pricing-li-multiAZ-deployments.min.js"
 RDS_OLD_ORACLE_BYOL_MULTIAZ_ON_DEMAND_URL = "http://a0.awsstatic.com/pricing/1/rds/oracle/previous-generation/pricing-byol-multiAZ-deployments.min.js"
-
 
 RDS_MYSQL_RESERVED_LIGHT_URL = "http://a0.awsstatic.com/pricing/1/rds/mysql/pricing-light-utilization-reserved-instances.min.js"
 RDS_MYSQL_RESERVED_MEDIUM_URL = "http://a0.awsstatic.com/pricing/1/rds/mysql/pricing-medium-utilization-reserved-instances.min.js"
@@ -168,6 +173,24 @@ RDS_OLD_SQLSERVER_SE_RESERVED_LIGHT_URL = "http://a0.awsstatic.com/pricing/1/rds
 RDS_OLD_SQLSERVER_SE_RESERVED_MEDIUM_URL = "http://a0.awsstatic.com/pricing/1/rds/sqlserver/previous-generation/sqlserver-li-se-medium-ri.min.js"
 RDS_OLD_SQLSERVER_SE_RESERVED_HEAVY_URL = "http://a0.awsstatic.com/pricing/1/rds/sqlserver/previous-generation/sqlserver-li-se-light-ri.min.js"
 
+RDS_MYSQL_RESERVED_STANDARD_V2_URL = "http://a0.awsstatic.com/pricing/1/rds/reserved-instances/mysql-standard.min.js"
+RDS_MYSQL_RESERVED_MULTIAZ_V2_URL = "http://a0.awsstatic.com/pricing/1/rds/reserved-instances/mysql-multiAZ.min.js"
+RDS_MARIADB_RESERVED_STANDARD_V2_URL = "http://a0.awsstatic.com/pricing/1/rds/reserved-instances/mariadb-standard.min.js"
+RDS_MARIADB_RESERVED_MULTIAZ_V2_URL = "http://a0.awsstatic.com/pricing/1/rds/reserved-instances/mariadb-multiAZ.min.js"
+RDS_POSTGRESQL_RESERVED_STANDARD_V2_URL = "http://a0.awsstatic.com/pricing/1/rds/reserved-instances/postgresql-standard.min.js"
+RDS_POSTGRESQL_RESERVED_MULTIAZ_V2_URL = "http://a0.awsstatic.com/pricing/1/rds/reserved-instances/postgresql-multiAZ.min.js"
+RDS_ORACLE_LICENSE_RESERVED_STANDARD_V2_URL = "http://a0.awsstatic.com/pricing/1/rds/reserved-instances/oracle-se1-license-included-standard.min.js"
+RDS_ORACLE_LICENSE_RESERVED_MULTIAZ_V2_URL = "http://a0.awsstatic.com/pricing/1/rds/reserved-instances/oracle-se1-license-included-multiAZ.min.js"
+RDS_ORACLE_BYOL_RESERVED_STANDARD_V2_URL = "http://a0.awsstatic.com/pricing/1/rds/reserved-instances/oracle-se-byol-standard.min.js"
+RDS_ORACLE_BYOL_RESERVED_MULTIAZ_V2_URL = "http://a0.awsstatic.com/pricing/1/rds/reserved-instances/oracle-se-byol-multiAZ.min.js"
+RDS_SQLSERVER_EX_LICENSE_STANDARD_V2_URL = "http://a0.awsstatic.com/pricing/1/rds/reserved-instances/sql-server-express-license-included-standard.min.js"
+RDS_SQLSERVER_WEB_LICENSE_STANDARD_V2_URL = "http://a0.awsstatic.com/pricing/1/rds/reserved-instances/sql-server-web-license-included-standard.min.js"
+RDS_SQLSERVER_SE_LICENSE_STANDARD_V2_URL = "http://a0.awsstatic.com/pricing/1/rds/reserved-instances/sql-server-se-license-included-standard.min.js"
+RDS_SQLSERVER_EX_LICENSE_MULTIAZ_V2_URL = "http://a0.awsstatic.com/pricing/1/rds/reserved-instances/sql-server-se-license-included-multiAZ.min.js"
+RDS_SQLSERVER_WEB_LICENSE_MULTIAZ_V2_URL = "http://a0.awsstatic.com/pricing/1/rds/reserved-instances/sql-server-ee-license-included-standard.min.js"
+RDS_SQLSERVER_SE_LICENSE_MULTIAZ_V2_URL = "http://a0.awsstatic.com/pricing/1/rds/reserved-instances/sql-server-ee-license-included-multiAZ.min.js"
+RDS_AURORA_RESERVED_MULTIAZ_V2_URL = "http://a0.awsstatic.com/pricing/1/rds/reserved-instances/aurora-multiAZ.min.js"
+
 
 RDS_MULTIAZ_TYPES = [
 	"standard",
@@ -181,19 +204,38 @@ RDS_MULTIAZ_MAPPING = {
 	"Standard Instances - Current Generation - Multi-AZ" : "multiaz",
 	"Memory Optimized Instances - Current Generation - Multi-AZ" : "multiaz",
 	"Micro and Small Instances - Current Generation - Multi-AZ" : "multiaz",
-        "Micro Instances - Previous Generation - Multi-AZ" : "multiaz",
+    "Micro Instances - Previous Generation - Multi-AZ" : "multiaz",
 	
 	"Standard Instances - Previous Generation - Single-AZ" : "standard",
 	"Memory Optimized Instances - Previous Generation - Single-AZ" : "standard",
 	"Micro and Small Instances - Previous Generation - Single-AZ" : "standard",
-        "Micro Instances - Previous Generation - Single-AZ" : "standard",
+    "Micro Instances - Previous Generation - Single-AZ" : "standard",
 	"Standard Instances - Previous Generation - Multi-AZ" : "multiaz",
 	"Memory Optimized Instances - Previous Generation - Multi-AZ" : "multiaz",
-	"Micro and Small Instances - Previous Generation - Multi-AZ" : "multiaz"
+	"Micro and Small Instances - Previous Generation - Multi-AZ" : "multiaz",
+    
+    RDS_MYSQL_RESERVED_STANDARD_V2_URL  : "standard",
+    RDS_MYSQL_RESERVED_MULTIAZ_V2_URL :  "multiaz",
+    RDS_MARIADB_RESERVED_STANDARD_V2_URL : "standard",
+    RDS_MARIADB_RESERVED_MULTIAZ_V2_URL : "multiaz",
+    RDS_POSTGRESQL_RESERVED_STANDARD_V2_URL : "standard",
+    RDS_POSTGRESQL_RESERVED_MULTIAZ_V2_URL : "multiaz",
+    RDS_ORACLE_LICENSE_RESERVED_STANDARD_V2_URL : "standard",
+    RDS_ORACLE_LICENSE_RESERVED_MULTIAZ_V2_URL : "multiaz",
+    RDS_ORACLE_BYOL_RESERVED_STANDARD_V2_URL : "standard",
+    RDS_ORACLE_BYOL_RESERVED_MULTIAZ_V2_URL : "multiaz",
+    RDS_SQLSERVER_EX_LICENSE_STANDARD_V2_URL : "standard",
+    RDS_SQLSERVER_WEB_LICENSE_STANDARD_V2_URL : "standard",
+    RDS_SQLSERVER_SE_LICENSE_STANDARD_V2_URL : "standard",
+    RDS_SQLSERVER_EX_LICENSE_MULTIAZ_V2_URL : "multiaz",
+    RDS_SQLSERVER_WEB_LICENSE_MULTIAZ_V2_URL : "multiaz",
+    RDS_SQLSERVER_SE_LICENSE_MULTIAZ_V2_URL : "multiaz",
+    RDS_AURORA_RESERVED_MULTIAZ_V2_URL : "multiaz",
 }
 
 RDS_ONDEMAND_STANDARD_TYPE_BY_URL = {
 	RDS_MYSQL_STANDARD_ON_DEMAND_URL : ["gpl","mysql"],
+    RDS_MARIADB_STANDARD_ON_DEMAND_URL : ["gpl","mariadb"],
 	RDS_POSTGRESQL_STANDARD_ON_DEMAND_URL : ["postgresql","postgres"],
 	RDS_ORACLE_LICENSED_STANDARD_ON_DEMAND_URL : ["included","oracle-se1"],
 	RDS_ORACLE_BYOL_STANDARD_ON_DEMAND_URL : ["byol","oracle"],
@@ -214,6 +256,8 @@ RDS_ONDEMAND_STANDARD_TYPE_BY_URL = {
 
 RDS_ONDEMAND_MULTIAZ_TYPE_BY_URL = {
 	RDS_MYSQL_MULTIAZ_ON_DEMAND_URL : ["gpl","mysql"],
+    RDS_MARIADB_MULTIAZ_ON_DEMAND_URL : ["gpl","mariadb"],
+    RDS_AURORA_MULTIAZ_ON_DEMAND_URL : ["amazon", "aurora"],
 	RDS_POSTGRESQL_MULTIAZ_ON_DEMAND_URL : ["postgresql","postgres"],
 	RDS_ORACLE_LICENSED_MULTIAZ_ON_DEMAND_URL: ["included","oracle-se1"],
 	RDS_ORACLE_BYOL_MULTIAZ_ON_DEMAND_URL : ["byol","oracle"],
@@ -269,15 +313,40 @@ RDS_RESERVED_TYPE_BY_URL = {
 	RDS_OLD_SQLSERVER_WEB_RESERVED_HEAVY_URL : ["included","sqlserver-web","heavy"],
 	RDS_OLD_SQLSERVER_SE_RESERVED_LIGHT_URL : ["included","sqlserver-se","light"],
 	RDS_OLD_SQLSERVER_SE_RESERVED_MEDIUM_URL : ["included","sqlserver-se","medium"],
-	RDS_OLD_SQLSERVER_SE_RESERVED_HEAVY_URL : ["included","sqlserver-se","heavy"]
+	RDS_OLD_SQLSERVER_SE_RESERVED_HEAVY_URL : ["included","sqlserver-se","heavy"],
 
+    RDS_MYSQL_RESERVED_STANDARD_V2_URL  : ["gpl","mysql","v2"],
+    RDS_MYSQL_RESERVED_MULTIAZ_V2_URL :  ["gpl","mysql","v2"],
+    RDS_MARIADB_RESERVED_STANDARD_V2_URL : ["gpl","mariadb","v2"],
+    RDS_MARIADB_RESERVED_MULTIAZ_V2_URL : ["gpl","mariadb","v2"],
+    RDS_POSTGRESQL_RESERVED_STANDARD_V2_URL : ["postgresql","postgres","v2"],
+    RDS_POSTGRESQL_RESERVED_MULTIAZ_V2_URL : ["postgresql","postgres","v2"],
+    RDS_ORACLE_LICENSE_RESERVED_STANDARD_V2_URL : ["included","oracle-se1","v2"],
+    RDS_ORACLE_LICENSE_RESERVED_MULTIAZ_V2_URL : ["included","oracle-se1","v2"],
+    RDS_ORACLE_BYOL_RESERVED_STANDARD_V2_URL : ["byol","oracle","v2"],
+    RDS_ORACLE_BYOL_RESERVED_MULTIAZ_V2_URL : ["byol","oracle","v2"],
+    RDS_SQLSERVER_EX_LICENSE_STANDARD_V2_URL : ["included","sqlserver-ex","v2"],
+    RDS_SQLSERVER_WEB_LICENSE_STANDARD_V2_URL : ["included","sqlserver-web","v2"],
+    RDS_SQLSERVER_SE_LICENSE_STANDARD_V2_URL : ["included","sqlserver-se","v2"],
+    RDS_SQLSERVER_EX_LICENSE_MULTIAZ_V2_URL : ["included","sqlserver-ex","v2"],
+    RDS_SQLSERVER_WEB_LICENSE_MULTIAZ_V2_URL : ["included","sqlserver-web","v2"],
+    RDS_SQLSERVER_SE_LICENSE_MULTIAZ_V2_URL : ["included","sqlserver-se","v2"],
+    RDS_AURORA_RESERVED_MULTIAZ_V2_URL : ["amazon","aurora","v2"]
 }
 
 DEFAULT_CURRENCY = "USD"
 
+VERBOSE = False
 
 def _load_data(url):
-	f = urllib2.urlopen(url).read()
+	try:
+		f = urllib2.urlopen(url).read()
+	except:
+		if VERBOSE:
+			sys.stderr.write("ERROR: %s\n" % url)
+		return {}
+	if VERBOSE:
+		sys.stderr.write("OK: %s\n" % url)
 	f = re.sub("/\\*[^\x00]+\\*/", "", f, 0, re.M)
 	f = re.sub("([a-zA-Z0-9]+):", "\"\\1\":", f)
 	f = re.sub(";", "\n", f)
@@ -342,7 +411,25 @@ def get_rds_reserved_instances_prices(filter_region=None, filter_instance_type=N
 		RDS_OLD_SQLSERVER_WEB_RESERVED_HEAVY_URL,
 		RDS_OLD_SQLSERVER_SE_RESERVED_LIGHT_URL,
 		RDS_OLD_SQLSERVER_SE_RESERVED_MEDIUM_URL,
-		RDS_OLD_SQLSERVER_SE_RESERVED_HEAVY_URL	
+		RDS_OLD_SQLSERVER_SE_RESERVED_HEAVY_URL,
+        
+        RDS_MYSQL_RESERVED_STANDARD_V2_URL,
+        RDS_MYSQL_RESERVED_MULTIAZ_V2_URL,
+        RDS_MARIADB_RESERVED_STANDARD_V2_URL,
+        RDS_MARIADB_RESERVED_MULTIAZ_V2_URL,
+        RDS_POSTGRESQL_RESERVED_STANDARD_V2_URL,
+        RDS_POSTGRESQL_RESERVED_MULTIAZ_V2_URL,
+        RDS_ORACLE_LICENSE_RESERVED_STANDARD_V2_URL,
+        RDS_ORACLE_LICENSE_RESERVED_MULTIAZ_V2_URL,
+        RDS_ORACLE_BYOL_RESERVED_STANDARD_V2_URL,
+        RDS_ORACLE_BYOL_RESERVED_MULTIAZ_V2_URL,
+        RDS_SQLSERVER_EX_LICENSE_STANDARD_V2_URL,
+        RDS_SQLSERVER_WEB_LICENSE_STANDARD_V2_URL,
+        RDS_SQLSERVER_SE_LICENSE_STANDARD_V2_URL,
+        RDS_SQLSERVER_EX_LICENSE_MULTIAZ_V2_URL,
+        RDS_SQLSERVER_WEB_LICENSE_MULTIAZ_V2_URL,
+        RDS_SQLSERVER_SE_LICENSE_MULTIAZ_V2_URL,
+        RDS_AURORA_RESERVED_MULTIAZ_V2_URL
 	]
 
 	result_regions = []
@@ -358,7 +445,7 @@ def get_rds_reserved_instances_prices(filter_region=None, filter_instance_type=N
 		info = RDS_RESERVED_TYPE_BY_URL[u]
 		lic = info[0]
 		db = info[1]
-		utilization_type = info[2]
+		reservation_type = info[2]
 		
 		if get_specific_db and db != filter_db:
 			continue
@@ -381,55 +468,98 @@ def get_rds_reserved_instances_prices(filter_region=None, filter_instance_type=N
 						
 					if "instanceTypes" in r:
 						for it in r["instanceTypes"]:
-							multiaz = RDS_MULTIAZ_MAPPING[it["type"]]
-							if get_specific_multiaz and multiaz != filter_multiaz:
-								continue
-							if "tiers" in it:
-								for s in it["tiers"]:
-									_type = s["size"]
-	
-									if get_specific_instance_type and _type != filter_instance_type:
+							# new reserved rds instances
+							if reservation_type == "v2":
+								multiaz = RDS_MULTIAZ_MAPPING[u]
+								if get_specific_multiaz and multiaz != filter_multiaz:
+									continue
+
+								_type = it["type"]
+								if get_specific_instance_type and _type != filter_instance_type:
 										continue
-									
-									prices = {
-										"1year" : {
-											"hourly" : None,
-											"upfront" : None
-										},
-										"3year" : {
-											"hourly" : None,
-											"upfront" : None
-										}
-									}
-	
-									instance_types.append({
-										"type" : _type,
-										"multiaz" : multiaz,
-										"license" : lic,
-										"db" : db,
-										"utilization" : utilization_type,
-										"prices" : prices
-									})
-	
-									for price_data in s["valueColumns"]:
-										price = None
-										try:
-											price = float(re.sub("[^0-9\.]", "", price_data["prices"][currency]))
-										except ValueError:
+								for term in it["terms"]:
+									for purchaseOpt in term["purchaseOptions"]:
+										upfront = ""
+										hourly = ""
+										prices = {}
+										for price_data in purchaseOpt["valueColumns"]:
+											if price_data["name"] == "upfront":
+												upfront1 = price_data["prices"]["USD"];
+												if upfront1 == "N/A":
+													upfront = ""
+												else:
+													upfront = upfront1.replace(",", "")
+											if price_data["name"] == "monthlyStar":
+												monthly = price_data["prices"]["USD"]
+												if monthly == "N/A":
+													hourly = ""
+												elif monthly == "":
+													hourly = "0"
+												else:
+													hourly = float(monthly.replace(",","")) * 12 / 365 / 24
+										if term["term"] == "yrTerm1":
+											prices["1year"] = {"upfront" :  upfront, "hourly" : hourly}
+										if term["term"] == "yrTerm3":
+											prices["3year"] = {"upfront" :  upfront, "hourly" : hourly}
+										instance_types.append({
+													"type" : _type,
+													"multiaz" : multiaz,
+													"license" : lic,
+													"db" : db,
+													"reservation" : purchaseOpt["purchaseOption"],
+													"prices" : prices
+												})
+							else:
+								# old reserved rds instances
+								multiaz = RDS_MULTIAZ_MAPPING[it["type"]]
+								if get_specific_multiaz and multiaz != filter_multiaz:
+									continue
+								if "tiers" in it:
+									for s in it["tiers"]:
+										_type = s["size"]
+		
+										if get_specific_instance_type and _type != filter_instance_type:
+											continue
+										
+										prices = {
+    										"1year" : {
+    											"hourly" : None,
+    											"upfront" : None
+    										},
+    										"3year" : {
+    											"hourly" : None,
+    											"upfront" : None
+    										}
+    									}
+		
+										instance_types.append({
+    										"type" : _type,
+    										"multiaz" : multiaz,
+    										"license" : lic,
+    										"db" : db,
+    										"reservation" : reservation_type,
+    										"prices" : prices
+    									})
+		
+										for price_data in s["valueColumns"]:
 											price = None
-	
-										if price_data["name"] == "yrTerm1":
-											prices["1year"]["upfront"] = price
-										elif price_data["name"] == "yrTerm1Hourly":
-											prices["1year"]["hourly"] = price
-										elif price_data["name"] == "yearTerm1Hourly":
-											prices["1year"]["hourly"] = price
-										elif price_data["name"] == "yrTerm3":
-											prices["3year"]["upfront"] = price
-										elif price_data["name"] == "yrTerm3Hourly":
-											prices["3year"]["hourly"] = price
-										elif price_data["name"] == "yearTerm3Hourly":
-											prices["3year"]["hourly"] = price			
+											try:
+												price = float(re.sub("[^0-9\.]", "", price_data["prices"][currency]))
+											except ValueError:
+												price = None
+		
+											if price_data["name"] == "yrTerm1":
+												prices["1year"]["upfront"] = price
+											elif price_data["name"] == "yrTerm1Hourly":
+												prices["1year"]["hourly"] = price
+											elif price_data["name"] == "yearTerm1Hourly":
+												prices["1year"]["hourly"] = price
+											elif price_data["name"] == "yrTerm3":
+												prices["3year"]["upfront"] = price
+											elif price_data["name"] == "yrTerm3Hourly":
+												prices["3year"]["hourly"] = price
+											elif price_data["name"] == "yearTerm3Hourly":
+												prices["3year"]["hourly"] = price			
 
 	return result
 
@@ -456,6 +586,7 @@ def get_rds_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 	
 	urls = [
 	RDS_MYSQL_STANDARD_ON_DEMAND_URL,
+    RDS_MARIADB_STANDARD_ON_DEMAND_URL,
 	RDS_POSTGRESQL_STANDARD_ON_DEMAND_URL,
 	RDS_ORACLE_LICENSED_STANDARD_ON_DEMAND_URL,
 	RDS_ORACLE_BYOL_STANDARD_ON_DEMAND_URL,
@@ -464,6 +595,8 @@ def get_rds_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 	RDS_MSSQL_LICENSED_STANDARD_ON_DEMAND_URL,
 	RDS_MSSQL_BYOL_STANDARD_ON_DEMAND_URL,
 	RDS_MYSQL_MULTIAZ_ON_DEMAND_URL,
+    RDS_MARIADB_MULTIAZ_ON_DEMAND_URL,
+    RDS_AURORA_MULTIAZ_ON_DEMAND_URL,
 	RDS_POSTGRESQL_MULTIAZ_ON_DEMAND_URL,
 	RDS_ORACLE_LICENSED_MULTIAZ_ON_DEMAND_URL,
 	RDS_ORACLE_BYOL_MULTIAZ_ON_DEMAND_URL,
@@ -533,6 +666,8 @@ def get_rds_ondemand_instances_prices(filter_region=None, filter_instance_type=N
 
 if __name__ == "__main__":
 	def none_as_string(v):
+		if v == 0:
+			return "0"
 		if not v:
 			return ""
 		else:
@@ -551,8 +686,12 @@ if __name__ == "__main__":
 	parser.add_argument("--filter-multiaz", "-fz", help="Filter results to a specific db license", choices=RDS_MULTIAZ_TYPES, default=None)
 	parser.add_argument("--filter-db", "-fd", help="Filter results to a specific db type", choices=RDS_ENGINE_TYPES, default=None)
 	parser.add_argument("--format", "-f", choices=["json", "table", "csv"], help="Output format", default="table")
+	parser.add_argument("--verbose", "-v", help="Verbose output to stderr", action="store_true")
 
 	args = parser.parse_args()
+	
+	if args.verbose:
+		VERBOSE = True
 
 	if args.format == "table":
 		try:
@@ -592,9 +731,9 @@ if __name__ == "__main__":
 					x.add_row([region_name, it["type"], it["multiaz"], it["license"], it["db"], none_as_string(it["price"])])
 		elif args.type == "reserved":
 			try:
-				x.set_field_names(["region", "type", "multiaz", "license", "db", "utilization", "term", "price", "upfront"])
+				x.set_field_names(["region", "type", "multiaz", "license", "db", "reservation", "term", "price", "upfront"])
 			except AttributeError:
-				x.field_names = ["region", "type", "multiaz", "license", "db", "utilization", "term", "price", "upfront"]
+				x.field_names = ["region", "type", "multiaz", "license", "db", "reservation", "term", "price", "upfront"]
 
 			try:
 				x.aligns[-1] = "l"
@@ -607,7 +746,7 @@ if __name__ == "__main__":
 				region_name = r["region"]
 				for it in r["instanceTypes"]:
 					for term in it["prices"]:
-						x.add_row([region_name, it["type"],  it["multiaz"], it["license"], it["db"], it["utilization"], term, none_as_string(it["prices"][term]["hourly"]), none_as_string(it["prices"][term]["upfront"])])
+						x.add_row([region_name, it["type"],  it["multiaz"], it["license"], it["db"], it["reservation"], term, none_as_string(it["prices"][term]["hourly"]), none_as_string(it["prices"][term]["upfront"])])
 		
 		print x
 	elif args.format == "csv":
@@ -618,9 +757,9 @@ if __name__ == "__main__":
 				for it in r["instanceTypes"]:
 					print "%s,%s,%s,%s,%s,%s" % (region_name, it["type"], it["multiaz"], it["license"], it["db"], none_as_string(it["price"]))
 		elif args.type == "reserved":
-					print "region,type,multiaz,license,db,utilization,term,price,upfront"
+					print "region,type,multiaz,license,db,reservation,term,price,upfront"
 					for r in data["regions"]:
 						region_name = r["region"]
 						for it in r["instanceTypes"]:
 							for term in it["prices"]:
-								print "%s,%s,%s,%s,%s,%s,%s,%s,%s" % (region_name, it["type"], it["multiaz"], it["license"], it["db"], it["utilization"], term, none_as_string(it["prices"][term]["hourly"]), none_as_string(it["prices"][term]["upfront"]))
+								print "%s,%s,%s,%s,%s,%s,%s,%s,%s" % (region_name, it["type"], it["multiaz"], it["license"], it["db"], it["reservation"], term, none_as_string(it["prices"][term]["hourly"]), none_as_string(it["prices"][term]["upfront"]))
