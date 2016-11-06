@@ -32,6 +32,7 @@ except ImportError:
 
 RDS_REGIONS = [
 	"us-east-1",
+	"us-east-2",
 	"us-west-1",
 	"us-gov-west-1",
 	"us-west-2",
@@ -41,6 +42,7 @@ RDS_REGIONS = [
 	"ap-southeast-2",
 	"ap-northeast-1",
 	"ap-northeast-2",
+	"ap-sout-1",
 	"sa-east-1"
 ]
 
@@ -57,6 +59,11 @@ RDS_INSTANCE_TYPES = [
 	"db.m3.large",
 	"db.m3.xlarge",
 	"db.m3.2xlarge",
+	"db.m4.large",
+	"db.m4.xlarge",
+	"db.m4.2xlarge",
+	"db.m4.4xlarge",
+	"db.m4.10xlarge",
 	"db.r3.large",
 	"db.r3.xlarge",
 	"db.r3.2xlarge"
@@ -80,13 +87,14 @@ RDS_ENGINE_TYPES = [
 JSON_NAME_TO_RDS_REGIONS_API = {
 	"us-east" : "us-east-1",
 	"us-east-1" : "us-east-1",
+	"us-east-2" : "us-east-2",
 	"us-west" : "us-west-1",
 	"us-west-1" : "us-west-1",
 	"us-gov-west-1" : "us-gov-west-1",
 	"us-west-2" : "us-west-2",
 	"eu-ireland" : "eu-west-1",
 	"eu-west-1" : "eu-west-1",
-    "eu-frankfurt" : "eu-central-1",
+	"eu-frankfurt" : "eu-central-1",
 	"eu-central-1" : "eu-central-1",
 	"apac-sin" : "ap-southeast-1",
 	"ap-southeast-1" : "ap-southeast-1",
@@ -95,6 +103,7 @@ JSON_NAME_TO_RDS_REGIONS_API = {
 	"apac-tokyo" : "ap-northeast-1",
 	"ap-northeast-1" : "ap-northeast-1",
 	"ap-northeast-2" : "ap-northeast-2",
+	"ap-south-1" : "ap-south-1",
 	"sa-east-1" : "sa-east-1"
 }
 
